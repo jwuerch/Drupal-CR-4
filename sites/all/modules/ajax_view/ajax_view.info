@@ -1,0 +1,5 @@
+name = Ajax Viewer
+description = Allows you to make Ajax calls within a view
+core = 7.x
+package = Other
+files[] = ajax_view.module
