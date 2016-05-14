@@ -1,0 +1,6 @@
+name = DNA Module
+description = Matches nucleotides on DNA
+package = Other
+core = 7.x
+files[] = dna.module
+files[] = dna.test
