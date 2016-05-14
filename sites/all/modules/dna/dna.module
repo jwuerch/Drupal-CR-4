@@ -19,8 +19,8 @@ function dna_menu() {
 }
 
 function dna_match_form() {
-    $form['nucleotide'] = array(
-        '#title' => t('First Nucleotide'),
+    $form['nucleotides'] = array(
+        '#title' => t('Nucleotides'),
         '#description' => t('Enter in a string that only contains the combination of letters "A", "C", "G" or "T" without spaces to find your matching nucleotide sequence.'),
         '#type' => 'textfield',
         '#element_validate' => array('element_validate_input'),
@@ -44,4 +44,36 @@ function element_validate_input($element) {
             form_error($element, t('Please enter in a string that only contains any combination of "A", "G", "T", "C".'));
         }
     }
+}
+
+function find_match($input) {
+    $bases = str_split(strtoupper($input));
+    $output = array();
+
+    foreach($bases as $base) {
+        if ($base == "A") {
+            array_push($output, 'T');
+        } else if ($base == 'T') {
+            array_push($output, 'A');
+        } else if ($base == 'C') {
+            array_push($output, 'G');
+        } else if ($base == 'G') {
+            array_push($output, 'C');
+        }
+    }
+    $output = implode('', $output);
+    return $output;
+}
+
+function dna_match_form_submit($form, &$form_state) {
+    $input = $form_state['values']['nucleotides'];
+    $output = find_match($input);
+    $_SESSION['input'] = strtoupper($input);
+    $_SESSION['output'] = $output;
+    $form_state['redirect'] = 'dna_match_results_page';
+}
+
+function dna_match_results() {
+    return '<p>You entered in the base ' . $_SESSION['input'] . '.</p>
+            <p>Your matching nucleotide sequence is ' . $_SESSION['output'] . '.</p>';
 }
