@@ -41,61 +41,50 @@ class dnaMatchTestCase extends DrupalUnitTestCase  {
         //Third Pair-----------
         $description = "Guanine should match Cytosine";
 
-        //Arrange;
+        //Arrange
         $input = "G";
 
-        //Act;
+        //Act
         $result = find_match($input);
 
-        //Assert;
+        //Assert
         $this->assertTrue($result, $description);
 
         //Fourth Pair------------------
         $description = "Thymine should match Adenine";
 
-        //Arrange;
+        //Arrange
         $input = "T";
 
-        //Act;
+        //Act
         $result = find_match($input);
 
         //Assert;
         $this->assertTrue($input, $description);
 
         //Fifth Pair-------------------
-        $description = "AG should equal TC";
+        $description = "More than one letter should work. AG should equal TC";
 
-        //Arrange;
+        //Arrange
         $input = "AG";
 
-        //Act;
+        //Act
         $result = find_match($input);
-
-        //Assert;
-        $this->assertTrue($result, $description);
-
-        //Sixth Pair-----------------
-        $description = "AGCT should equal TCGA";
-
-        //Arrange;
-        $input = "AGCT";
-
-        //Act;
-        $result = find_match($input);
-
-        //Assert;
-        $this->assertTrue($result, $description);
 
         //Assert
-        $description = "Lowercase input should also work. ac should equal TG";
+        $this->assertTrue($result, $description);
 
-        //Arrange;
+
+        //Sixth Pair--------------------
+        $description = "Lowercase input should also work. actg should equal TGAC";
+
+        //Arrange
         $input = "ac";
 
-        //Act;
+        //Act
         $result = find_match($input);
 
-        //Assert;
-        $this-assertTrue($result, $description);
+        //Assert
+        $this->assertTrue($result, $description);
     }
 }

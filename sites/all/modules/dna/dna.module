@@ -38,9 +38,9 @@ function element_validate_input($element) {
     $input = str_split(strtoupper($element['#value']));
     foreach($input as $base) {
         if ($base == "U") {
-            "You're thinking of RNA! In an RNA strand, Uracil replaced Thymine. Take out the 'U' and enter in any combination of 'A', 'C', 'T', or 'G'.";
+            form_error($element, t("You're thinking of RNA! In an RNA strand, Uracil replaces the spot of Thymine. Take out the 'U' and enter in any combination of 'A', 'C', 'T', or 'G'."));
         }
-        if (!in_array($base, $bases)) {
+        else if (!in_array($base, $bases)) {
             form_error($element, t('Please enter in a string that only contains any combination of "A", "G", "T", "C".'));
         }
     }
