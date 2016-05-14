@@ -1,0 +1,98 @@
+<?php
+
+class dnaMatch extends DrupalUnitTestCase() {
+    public static function getInfo() {
+        return array(
+            'name' => 'DNA Match',
+            'description' => 'Tests matching of DNA nucleotides for DNA module',
+            'group' => 'DNA Group',
+        );
+    }
+
+    function testDnaMatch() {
+
+    //First Pair---------
+    $description = 'Cytosine returns Guanine';
+
+    //Arrange;
+    $input = "C";
+
+    //Act;
+    $result = find_match($input);
+
+    //Assert;
+    $this->assertTrue($result, $description);
+
+    //Second Pair----------
+    $description = 'Adenine returns Thymine';
+
+    //Arrange;
+    $input = "A";
+
+    //Act;
+    $result = find_match($input);
+
+    //Assert;
+    $this->assertTrue($result, $description)
+
+    //Third Pair-----------
+    $description = "Guanine should match Cytosine";
+
+    //Arrange;
+    $input = "G";
+
+    //Act;
+    $result = find_match($input);
+
+    //Assert;
+    $this->assertTrue($result, $description);
+
+    //Fourth Pair------------------
+    $description = "Thymine should match Adenine"
+
+    //Arrange;
+    $input = "T";
+
+    //Act;
+    $result = find_match($input);
+
+    //Assert;
+    $this->assertTrue($input, $description);
+
+    //Fifth Pair-------------------
+    $description = "AG should equal TC";
+
+    //Arrange;
+    $input = "AG";
+
+    //Act;
+    $result = find_match($input);
+
+    //Assert;
+    $this->assertTrue($result, $description);
+
+    //Sixth Pair-----------------
+    $description = "AGCT should equal TCGA";
+
+    //Arrange;
+    $input = "AGCT";
+
+    //Act;
+    $result = find_match($input);
+
+    //Assert;
+    $this->assertTrue($result, $description);
+
+    //Assert
+    $description = "Lowercase input should also work. ac should equal TG";
+
+    //Arrange;
+    $input = "ac";
+
+    //Act;
+    $result = find_match($input);
+
+    //Assert;
+    $this-assertTrue($result, $description);
+    }
+}
