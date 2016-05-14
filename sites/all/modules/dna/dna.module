@@ -1,0 +1,39 @@
+<?php
+
+function dna_menu() {
+    $items = array();
+    $items['dna'] = array(
+        'title' => 'DNA Match',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('dna_match_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM
+    );
+    $items['dna_match_results_page'] = array(
+        'title' => 'Results',
+        'page callback' => 'dna_match_results',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+
+function dna_match_form() {
+    $form['nucleotide'] = array(
+        '#title' => t('First Nucleotide'),
+        '#description' => t('Enter in a string that only contains the letters "A", "C", "G" or "T" without spaces to find your matching nucleotide sequence.'),
+        '#type' => 'textfield',
+        '#element_validate' => array('element_validate_input'),
+        '#required' => TRUE,
+    );
+    $form['submit'] => array(
+        '#type' => 'submit',
+        '#value' => 'Submit!',
+    );
+    return $form;
+}
+
+function element_validate_input($element) {
+    $element = str_split(strtoupper($element['#value']));
+
+}
