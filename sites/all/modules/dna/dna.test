@@ -85,6 +85,18 @@ class dnaMatchTestCase extends DrupalUnitTestCase  {
 
         //Assert
         $this->assertTrue($result, $description);
+
+        //Seventh Pair-------
+        $description = "Letters other than AGTC should be false.";
+
+        //Arrange;
+        $input = "t";
+
+        //Act;
+        $result = find_match($input);
+
+        //Assert;
+        $this->assertFalse($result, $description);
     }
 }
 
@@ -111,7 +123,7 @@ class dnaMatchTestFunctional extends DrupalWebTestCase {
         $this->assertText("You entered in the base TAGC.");
         $this->assertText("Your matching nucleotide sequence is ATCG.");
     }
-    public function _testWrongInput() {
+    public function testWrongInput() {
         $edit = array();
         $edit['nucleotides'] = "X";
         $this->drupalPost('dna', $edit, t('Submit!'));

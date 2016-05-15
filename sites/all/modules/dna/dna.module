@@ -34,13 +34,13 @@ function dna_match_form() {
 }
 
 function element_validate_input($element) {
-    $bases = array('A', 'C', 'T', 'G');
+    $four_bases = array('A', 'C', 'T', 'G');
     $input = str_split(strtoupper($element['#value']));
     foreach($input as $base) {
         if ($base == "U") {
             form_error($element, t("You're thinking of RNA! In an RNA strand, Uracil replaces the spot of Thymine. Take out the 'U' and enter in any combination of 'A', 'C', 'T', or 'G'."));
         }
-        else if (!in_array($base, $bases)) {
+        else if (!in_array($base, $four_bases)) {
             form_error($element, t('Please enter in a string that only contains any combination of "A", "G", "T", "C".'));
         }
     }
@@ -51,6 +51,10 @@ function find_match($input) {
     $output = array();
 
     foreach($bases as $base) {
+        $four_bases = array('A', 'C', 'T', 'G');
+        if (!in_array($base, $four_bases)) {
+            return FALSE;
+        }
         if ($base == "A") {
             array_push($output, 'T');
         } else if ($base == 'T') {
