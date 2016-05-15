@@ -101,15 +101,27 @@ class dnaMatchTestFunctional extends DrupalWebTestCase {
         parent::setUp(array('dna'));
     }
 
-    public function testDnaMatch() {
+    public function _testDnaMatch() {
         $this->drupalGet('dna');
         $this->assertText('DNA Match', 'Page Title');
         $this->assertText('Nucleotides', 'Form Title');
         $edit = array();
         $edit['nucleotides'] = "TAGC";
-        $this->drupalPost('dna', $edit, t('Submit!'));
+        $this->drupalPost(NULL, $edit, t('Submit!'));
         $this->assertText("You entered in the base TAGC.");
         $this->assertText("Your matching nucleotide sequence is ATCG.");
+    }
+    public function _testWrongInput() {
+        $edit = array();
+        $edit['nucleotides'] = "X";
+        $this->drupalPost('dna', $edit, t('Submit!'));
+        $this->assertText("Please enter in a string that only contains");
+    }
+    public function testWrongInputUracil() {
+        $edit = array();
+        $edit['nucleotides'] = "UAGTC";
+        $this->drupalPost('dna', $edit, t('Submit!'));
+        $this->assertText("You're thinking of RNA!");
 
     }
 
