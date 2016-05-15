@@ -7,7 +7,7 @@ class dnaMatchTestCase extends DrupalUnitTestCase  {
 
         return array(
         'name' => 'DNA Matcher',
-        'description' => 'Tests proper matching nitrogenous bases.',
+        'description' => 'Tests proper matching nitrogenous bases for unit testing.',
         'group' => 'DNA Match',
         );
     }
@@ -77,7 +77,6 @@ class dnaMatchTestCase extends DrupalUnitTestCase  {
 
         //Sixth Pair--------------------
         $description = "Lowercase input should also work. actg should equal TGAC";
-
         //Arrange
         $input = "ac";
 
@@ -87,4 +86,31 @@ class dnaMatchTestCase extends DrupalUnitTestCase  {
         //Assert
         $this->assertTrue($result, $description);
     }
+}
+
+class dnaMatchTestFunctional extends DrupalWebTestCase {
+    public static function getInfo() {
+        return array(
+        'name' => 'DNA Matcher',
+        'description' => 'Tests matching nitrogenous bases for functional testing.',
+        'group' => 'DNA Match',
+        );
+    }
+
+    public function setUp() {
+        parent::setUp(array('dna'));
+    }
+
+    public function testDnaMatch() {
+        $this->drupalGet('dna');
+        $this->assertText('DNA Match', 'Page Title');
+        $this->assertText('Nucleotides', 'Form Title');
+        $edit = array();
+        $edit['nucleotides'] = "TAGC";
+        $this->drupalPost('dna', $edit, t('Submit!'));
+        $this->assertText("You entered in the base TAGC.");
+        $this->assertText("Your matching nucleotide sequence is ATCG.");
+
+    }
+
 }

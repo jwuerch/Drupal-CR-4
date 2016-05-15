@@ -20,7 +20,7 @@ function dna_menu() {
 
 function dna_match_form() {
     $form['nucleotides'] = array(
-        '#title' => t('Nucleotides'),
+        '#title' => 'Nucleotides',
         '#description' => t('Enter in a string that only contains the combination of letters "A", "C", "G" or "T" without spaces to find your matching nucleotide sequence.'),
         '#type' => 'textfield',
         '#element_validate' => array('element_validate_input'),
@@ -28,7 +28,7 @@ function dna_match_form() {
     );
     $form['submit'] = array(
         '#type' => 'submit',
-        '#value' => 'Submit!',
+        '#value' => t('Submit!'),
     );
     return $form;
 }
