@@ -79,5 +79,6 @@ function dna_match_form_submit($form, &$form_state) {
 
 function dna_match_results() {
     return '<p>You entered in the base ' . $_SESSION['input'] . '.</p>
-            <p>Your matching nucleotide sequence is ' . $_SESSION['output'] . '.</p>';
+            <p>Your matching nucleotide sequence is ' . $_SESSION['output'] . '.</p>
+            <p><a href="/dna">Try again!</a></p>';
 }
