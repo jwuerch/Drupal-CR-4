@@ -1,29 +1,29 @@
 <?php
 
 function ajax_view_menu() {
-  $items = array();
-  $items['path-to-ajax/%/%'] = array(
-    'access arguments' => array('access content'),
-    'page callback' => 'ajax_view_ajax_callback',
-    'page arguments' => array(1,2),
-    'type' => MENU_CALLBACK,
-  );
-  return $items;
+    $items = array();
+    $items['path-to-ajax/%/%'] = array(
+        'access arguments' => array('access content'),
+        'page callback' => 'ajax_view_ajax_callback',
+        'page arguments' => array(1,2),
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
 }
 
 function ajax_view_ajax_callback($js, $node_id) {
-  $node = node_load($node_id);
+    $node = node_load($node_id);
 
-  if ($js == 'nojs') {
-    drupal_goto('node/' . $node->nid);
-  }
+    if ($js == 'nojs') {
+        drupal_goto('node/' . $node->nid);
+    }
 
-  $build = node_view($node);
-  $html = render($build);
+    $build = node_view($node);
+    $html = render($build);
 
-  $commands = array();
-  $commands[] = ajax_command_html('#ajax-call-wrapper', $html);
+    $commands = array();
+    $commands[] = ajax_command_html('#ajax-call-wrapper', $html);
 
-  print ajax_render($commands);
-  exit;
+    print ajax_render($commands);
+    exit;
 }
