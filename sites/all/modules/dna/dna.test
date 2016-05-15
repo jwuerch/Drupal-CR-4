@@ -89,26 +89,26 @@ class dnaMatchTestCase extends DrupalUnitTestCase  {
         //Seventh Pair--------------
         $description = "Letters other than AGTC should be false.";
 
-        //Arrange;
-        $input = "t";
+        //Arrange
+        $input = "x";
 
-        //Act;
+        //Act
         $result = find_match($input);
 
-        //Assert;
+        //Assert
         $this->assertFalse($result, $description);
 
         //Eighth Pair--------------
-        $description = "AGTC contained with letters that aren't AGTC should be false."; 
+        $description = "AGTC contained with letters that aren't AGTC should be false.";
 
-        //Arrange;
-        $input = "AGCTX";
+        //Arrange
+        $input = "AGCTXU";
 
-        //Act;
+        //Act
         $result = find_match($input);
 
-        //Assert;
-        $this->assertFale($result, $description);
+        //Assert
+        $this->assertFalse($result, $description);
     }
 }
 
